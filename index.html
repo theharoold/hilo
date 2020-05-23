@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Hi-Lo</title>
+		<style>
+		html,body
+		{
+		height:100%;
+		width:100%;
+		margin:0;
+		background-color:gray;
+		}
+		
+		#mainContainer
+		{
+		width:70%;
+		height:100%;
+		background-color:black;
+		margin-left:auto;
+		margin-right:auto;
+		}
+		#numberDisplay
+		{
+		height:100px;
+		width:200px;
+		margin:10px auto;
+		background-color:white;
+		border:2px solid gray;
+		border-radius:3px;
+		cursor:text;
+		line-height:100px;
+		text-align:center;
+		font-family:Arial;
+		font-size:25px;
+		}
+		#naslov
+		{
+		text-align:center;
+		font-family:Arial;
+		padding:50px;
+		margin:0;
+		color:white;
+		}
+		@media only screen and (max-width:700px){
+			#mainContainer
+			{
+			width:100%;
+			}
+		}
+		#generateDugme
+		{
+		margin:15px auto;
+		}
+		.tekst
+		{
+		text-align:center;
+		color:white;
+		font-family:Arial;
+		font-size:22px;
+		}
+		.buttonClick
+		{
+		border:1px solid white;
+		border-radius:5px;
+		background-color:black;
+		padding:5px;
+		font-family:Arial;
+		font-size:16px;
+		color:white;
+		}
+		</style>
+		<script>
+		let x = 0;
+		let x1 = 0;
+		function randomNumber(){
+			do {
+				x = Math.floor(Math.random()*10+1);
+			}
+			while (x===x1);
+			document.getElementById("numberDisplay").innerHTML=x;
+			x1=x;
+		}
+		let x2;
+		function higher(){
+			x2=x;
+			randomNumber();
+			let money = Number(document.getElementById("money").textContent);
+			if (x>x2)
+			{
+				document.getElementById("tekst").innerHTML="U pravu ste!";
+				money+=50;
+				document.getElementById("money").innerHTML=money;
+			}
+			else
+			{
+				document.getElementById("tekst").innerHTML="Pogrešili ste!";
+				money-=50;
+				document.getElementById("money").innerHTML=money;
+			}
+		}
+		function lower(){
+			x2=x;
+			randomNumber();
+			let money = Number(document.getElementById("money").textContent);
+			if (x<x2)
+			{
+				document.getElementById("tekst").innerHTML="U pravu ste!";
+				money+=50;
+				document.getElementById("money").innerHTML=money;
+			}
+			else
+			{
+				document.getElementById("tekst").innerHTML="Pogrešili ste!";
+				money-=50;
+				document.getElementById("money").innerHTML=money;
+			}
+		}
+		</script>
+	</head>
+	<body onload="randomNumber()">
+		<div id="mainContainer">
+			<h1 id="naslov">Hi-Lo</h1>
+			<div id="numberDisplay">
+			
+			</div>
+			<p style="text-align:center;">
+				<button class="buttonClick"id="generateDugme" onclick="randomNumber()">Generate Number</button>
+			</p>
+			<p style="text-align:center">
+				<button class="buttonClick"onclick="higher()">Higher</button>
+				<button class="buttonClick"onclick="lower()">Lower</button>
+			</p>
+			<p id="tekst"class="tekst"></p>
+			<p class="tekst">
+			Novac: <span id="money">500</span>$
+			</p>
+		</div>
+	</body>
+</html>
